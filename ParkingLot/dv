@@ -1,0 +1,312 @@
+[33mcommit 58e32fdbcdaf4ea8aee1d9eb39d1f3bc6bae7b44[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: AashishVerma07 <ashish.verma@sparkeighteen.com>
+Date:   Mon Mar 7 14:00:18 2022 +0530
+
+    All filees
+
+[1mdiff --git a/10-02-22.txt b/10-02-22.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ac34c02[m
+[1m--- /dev/null[m
+[1m+++ b/10-02-22.txt[m
+[36m@@ -0,0 +1,5 @@[m
+[32m+[m[32m1,1,cg01,0[m
+[32m+[m[32m2,2,cg02,0[m
+[32m+[m[32m1,1,cg01,1[m
+[32m+[m[32m2,2,cg02,1[m
+[32m+[m[32m4,4,cg03,0[m
+[1mdiff --git a/ParkingLot.rb b/ParkingLot.rb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..974e5d0[m
+[1m--- /dev/null[m
+[1m+++ b/ParkingLot.rb[m
+[36m@@ -0,0 +1,70 @@[m
+[32m+[m[32mrequire_relative "fileio.rb" #Collection file[m
+[32m+[m[32mrequire_relative "Vehicle class.rb" #class file[m
+[32m+[m
+[32m+[m[32mclass ParkingLot             #start[m
+[32m+[m[32m  @@config=Config.new()      #call config class[m
+[32m+[m[32m  @@db=FileReadWrite.new()   #Datebase class[m
+[32m+[m
+[32m+[m[32m  def lot_start()[m
+[32m+[m[32m    main_menu()[m
+[32m+[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def main_menu()[m
+[32m+[m[32m  @@config.getAMTSIZE()       #method call line 28 in class parking lot[m
+[32m+[m
+[32m+[m[32m    system "cls"        #Clear screen[m
+[32m+[m
+[32m+[m[32m  @@config.showStatus()[m
+[32m+[m
+[32m+[m[32m    puts("-:Welcome To Spark 18's Parking Lot:-\n\n")[m
+[32m+[m
+[32m+[m[32m    puts("-:Main Menu:-\n\n1:IN\n\n2:OUT\n\n3:List Vehicles Inside\n\n4:List Vehicle Out\n\nx:Close")  #Starting application[m
+[32m+[m
+[32m+[m[32m   @@config.getAMTSIZE()[m
+[32m+[m
+[32m+[m[32m      opt=gets.chomp[m
+[32m+[m
+[32m+[m[32m      if opt=="1"[m
+[32m+[m
+[32m+[m[32m        @@config.vehicle_in()[m
+[32m+[m
+[32m+[m[32m      elsif opt=="2"[m
+[32m+[m
+[32m+[m[32m        @@config.vehicle_out()[m
+[32m+[m
+[32m+[m[32m      elsif opt=="3"[m
+[32m+[m
+[32m+[m[32m        system "cls"[m
+[32m+[m
+[32m+[m[32m        @@db.PrintLineFile("1\n")    #Print list of collaction[m
+[32m+[m
+[32m+[m[32m        gets.chomp[m
+[32m+[m
+[32m+[m[32m      elsif opt=="4"[m
+[32m+[m
+[32m+[m[32m        system "cls"[m
+[32m+[m
+[32m+[m[32m        @@db.PrintLineFile("0\n")    #Print list of collaction[m
+[32m+[m
+[32m+[m[32m        gets.chomp[m
+[32m+[m
+[32m+[m[32m      elsif opt=="x"[m
+[32m+[m
+[32m+[m[32m        exit                #Exit to cansole[m
+[32m+[m
+[32m+[m[32m      else[m
+[32m+[m
+[32m+[m[32m        main_menu()[m
+[32m+[m
+[32m+[m[32m      end[m
+[32m+[m[32m  end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32mwhile(true)                 # Loop to contineu application till exis[m
+[32m+[m
+[32m+[m[32m  plot = ParkingLot.new()[m
+[32m+[m
+[32m+[m[32m  plot.lot_start()[m
+[32m+[m
+[32m+[m[32mend[m
+[1mdiff --git a/Vehicle class.rb b/Vehicle class.rb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1e90183[m
+[1m--- /dev/null[m
+[1m+++ b/Vehicle class.rb[m	
+[36m@@ -0,0 +1,134 @@[m
+[32m+[m[32mrequire_relative "fileio.rb"[m
+[32m+[m[32mclass Config                 #Size and ammount of vehicle[m
+[32m+[m
+[32m+[m[32m  @@fileName=Time.now.strftime("%d-%m-%y")[m
+[32m+[m[32m  @@config=Config.new()[m
+[32m+[m[32m  @@db=FileReadWrite.new()[m
+[32m+[m[32m  @@db.CreateFile()[m
+[32m+[m
+[32m+[m[32m  def showStatus()[m
+[32m+[m[32m        puts("Total Size : " + @@config.Total_Size().to_s+"\n\n")[m
+[32m+[m[32m        puts("Occupy Size : "+@@size.to_s+"\n\n")[m
+[32m+[m[32m        puts("Amount Received : "+@@amt.to_s+"\n\n""Size Available : "+(@@config.Total_Size().to_i-@@size.to_i).to_s+"\n\n")[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def Total_Size()[m
+[32m+[m[32m    return 20[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def size_Bike()[m
+[32m+[m[32m    return "1"[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def size_Car()[m
+[32m+[m[32m    return "2"[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def size_Truck()[m
+[32m+[m[32m    return "4"[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def amount_Bike()[m
+[32m+[m[32m    return "1"[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def amount_Car()[m
+[32m+[m[32m    return "2"[m
+[32m+[m[32m  end[m
+[32m+[m[32m  def amount_Truck()[m
+[32m+[m[32m     return "4"[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def ToIn(size,amount,regno)          #when vehicle in[m
+[32m+[m[32m    @@db.WriteOnFile(size.to_s+","+amount.to_s+","+regno+",1")   #in string formate[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def AvailableSize(vehicleSize)          #show how many vehicles parked[m
+[32m+[m[32m    return (@@config.Total_Size - @@size)/(vehicleSize.to_i)[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def CheckSpaceAvailable(sz)           # sz is incoming IN vehicle size[m
+[32m+[m[32m    totsize=@@config.Total_Size()       #method call line 21 in config class[m
+[32m+[m[32m    if(@@size + sz.to_i > totsize)[m
+[32m+[m[32m      return 0[m
+[32m+[m[32m    else[m
+[32m+[m[32m      return 1[m
+[32m+[m[32m    end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def GetTotalAmount()                # call when vehicle in or out[m
+[32m+[m[32m    totAmount=0[m
+[32m+[m[32m    totSizeFull=0[m
+[32m+[m[32m    myFile=File.open(@@fileName+".txt","r")[m
+[32m+[m[32m    while(line=myFile.gets)[m
+[32m+[m[32m      if(line.split(",")[3].gsub("\n","")=="0")    #.gsub iis use to replace.[m
+[32m+[m[32m        totAmount+=line.split(",")[1].to_i[m
+[32m+[m[32m      else[m
+[32m+[m[32m        totSizeFull+=line.split(",")[0].to_i[m
+[32m+[m[32m      end[m
+[32m+[m[32m    end[m
+[32m+[m[32m    return totAmount.to_s+","+totSizeFull.to_s   # Return ammount and empty space[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def getAMTSIZE()[m
+[32m+[m[32m   @@amt_size= @@config.GetTotalAmount[m
+[32m+[m
+[32m+[m[32m    @@amt=@@amt_size.split(",")[0].to_i[m
+[32m+[m
+[32m+[m[32m    @@size=@@amt_size.split(",")[1].to_i[m
+[32m+[m
+[32m+[m[32m    @@str=@@db.GetAllFileAsString()[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def vehicle_out()[m
+[32m+[m[32m      #showStatus()[m
+[32m+[m[32m      puts("Enter the Regno. =")[m
+[32m+[m[32m      d=gets.chomp[m
+[32m+[m[32m      if(@@str.index(d+",1\n")!=nil)[m
+[32m+[m[32m        @@str=@@str.gsub(d+",1\n",d+",0\n")[m
+[32m+[m[32m        @@db.WriteOnFile_Replace(@@str)[m
+[32m+[m[32m      else[m
+[32m+[m[32m        puts("Vehicle Not Found")[m
+[32m+[m[32m        d=gets.chomp[m
+[32m+[m[32m      end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def vehicle_in()           #select vehicle[m
+[32m+[m[32m  system"cls"             #clear screen[m
+[32m+[m[32m  showStatus()[m
+[32m+[m[32m  puts("Vehicle In\n")[m
+[32m+[m[32m  puts("Select Vehicle Type\n\n 1:Bike ("+AvailableSize(@@config.size_Bike).to_s+")\n\n 2:Car ("+AvailableSize(@@config.size_Car).to_s+")\n\n 3:Truck ("+AvailableSize(@@config.size_Truck).to_s+")\n\n 4:Main Menu")[m
+[32m+[m[32m  vtype=gets.chomp         #Get value[m
+[32m+[m[32m  if(vtype=="4")[m
+[32m+[m[32m    main_menu()[m
+[32m+[m[32m  else[m
+[32m+[m[32m    if(vtype=="1")[m
+[32m+[m[32m      if(CheckSpaceAvailable(@@config.size_Bike)==1)[m
+[32m+[m[32m        puts("Enter Regno. = ")[m
+[32m+[m[32m        regno=gets.chomp[m
+[32m+[m[32m        @@config.ToIn(@@config.size_Bike,@@config.amount_Bike, regno) #Data is called to another file[m
+[32m+[m[32m      else[m
+[32m+[m[32m        puts("Space Not Available for Bike")[m
+[32m+[m[32m        a=gets.chomp[m
+[32m+[m[32m      end[m
+[32m+[m[32m    elsif(vtype=="2")[m
+[32m+[m[32m      if(CheckSpaceAvailable(@@config.size_Car)==1)[m
+[32m+[m[32m        puts("Enter Regno. = ")[m
+[32m+[m[32m        regno=gets.chomp[m
+[32m+[m[32m        @@config.ToIn(@@config.size_Car,@@config.amount_Car,regno)[m
+[32m+[m[32m      else[m
+[32m+[m[32m        puts("Space Not Available for Car")[m
+[32m+[m[32m        a=gets.chomp[m
+[32m+[m[32m      end[m
+[32m+[m[32m    elsif(vtype=="3")[m
+[32m+[m[32m      if(CheckSpaceAvailable(@@config.size_Truck)==1)[m
+[32m+[m[32m        puts("Enter Regno. = ")[m
+[32m+[m[32m        regno=gets.chomp[m
+[32m+[m[32m        @@config.ToIn(@@config.size_Truck,@@config.amount_Truck,regno)[m
+[32m+[m[32m      else[m
+[32m+[m[32m        puts("Space Not Available for Truck")[m
+[32m+[m[32m        a=gets.chomp[m
+[32m+[m[32m      end[m
+[32m+[m[32m    else[m
+[32m+[m[32m      puts("Invalid Option")[m
+[32m+[m[32m      a=gets.chomp[m
+[32m+[m[32m  end[m
+[32m+[m[32m  end[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32mend[m
+[1mdiff --git a/fileio.rb b/fileio.rb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..526c767[m
+[1m--- /dev/null[m
+[1m+++ b/fileio.rb[m
+[36m@@ -0,0 +1,73 @@[m
+[32m+[m[32mclass FileReadWrite         #Data file[m
+[32m+[m[32m  @@fileName=Time.now.strftime("%d-%m-%y") #Creat file to use date(filename)[m
+[32m+[m
+[32m+[m[32m  def CreateFile()[m
+[32m+[m
+[32m+[m[32m    if File::exists?(@@fileName+".txt" )  #check file is existing or not[m
+[32m+[m
+[32m+[m[32m       aFile = File.new(@@fileName+".txt", "a")  # "a" is apend funtion which is hold previous data[m
+[32m+[m
+[32m+[m[32m      aFile.close[m
+[32m+[m
+[32m+[m[32m    else[m
+[32m+[m
+[32m+[m[32m      aFile = File.new(@@fileName+".txt", "a")    # when file is not exists create a new file[m
+[32m+[m
+[32m+[m[32m      aFile.close[m
+[32m+[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def WriteOnFile(dt)[m
+[32m+[m
+[32m+[m[32m      aFile = File.new(@@fileName+".txt", "a")    # when file is not exists create a new file[m
+[32m+[m
+[32m+[m[32m      aFile.syswrite(dt)                         # .syswrite is ue to write data in file[m
+[32m+[m
+[32m+[m[32m      aFile.syswrite("\n")[m
+[32m+[m
+[32m+[m[32m      aFile.close[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def WriteOnFile_Replace(dt)[m
+[32m+[m
+[32m+[m[32m      aFile = File.new(@@fileName+".txt", "w")    # when file is not exists create a new file[m
+[32m+[m
+[32m+[m[32m      aFile.syswrite(dt)   # .syswrite is ue to write data in file[m
+[32m+[m
+[32m+[m[32m      aFile.close[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def GetAllFileAsString()            #we store file in one object[m
+[32m+[m
+[32m+[m[32m    myFile=File.open(@@fileName+".txt","r")[m
+[32m+[m
+[32m+[m[32m    str=""[m
+[32m+[m
+[32m+[m[32m    while(line=myFile.gets)[m
+[32m+[m
+[32m+[m[32m      str=str + line[m
+[32m+[m
+[32m+[m[32m    end[m
+[32m+[m
+[32m+[m[32m    myFile.close[m
+[32m+[m
+[32m+[m[32m    return str[m
+[32m+[m[32m  end[m
+[32m+[m
+[32m+[m[32m  def PrintLineFile(status)           #it is given to list of vehicle data or details[m
+[32m+[m
+[32m+[m[32m    myFile=File.open(@@fileName+".txt","r")[m
+[32m+[m
+[32m+[m[32m    puts("Size  Amount  Reg-No.  Status")[m
+[32m+[m
+[32m+[m[32m    while(line=myFile.gets)[m
+[32m+[m
+[32m+[m[32m      if(line!="" && line.split(",")[3].to_s==status)[m
+[32m+[m
+[32m+[m[32m        puts(line.split(",")[0]+"     "+line.split(",")[1]+"        "+line.split(",")[2]+"    "+line.split(",")[3])[m
+[32m+[m[32m      end[m
+[32m+[m[32m    end[m
+[32m+[m[32m  end[m
+[32m+[m[32mend[m
